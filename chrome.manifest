@@ -1,0 +1,6 @@
+content ctrlctrl jar:chrome/ctrlctrl.jar!/chrome/content/
+skin ctrlctrl classic/1.0 jar:chrome/ctrlctrl.jar!/chrome/skin/
+locale ctrlctrl en-US jar:chrome/ctrlctrl.jar!/chrome/locale/en-US/
+locale ctrlctrl zh-CN jar:chrome/ctrlctrl.jar!/chrome/locale/zh-CN/
+overlay   chrome://browser/content/browser.xul   chrome://ctrlctrl/content/overlay.xul
+resource ctrlctrl modules/

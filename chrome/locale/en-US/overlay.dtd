@@ -1,0 +1,31 @@
+<!ENTITY handysearch.other "addition">
+<!ENTITY handysearch.other.singlekeysearch "Single Key Search">
+<!ENTITY handysearch.other.singlekeysearch.setting "setting...">
+<!ENTITY handysearch.other.handynotesearch "Search Database of HandyNote">
+<!ENTITY handysearch.other.singlekeyoperation "Mattmonkey's single key Operation">
+<!ENTITY handysearch.other.singlekeyoperation.detail "Detail...">
+
+<!ENTITY handysearch.seleted "The Selected Search Engine">
+<!ENTITY handysearch.seleted.rememberdefaultengine "Remember Default Search Engine">
+<!ENTITY handysearch.seleted.rememberlastusedengine "Remember Last Used Engine">
+
+<!ENTITY handysearch.appearance "appearance">
+<!ENTITY handysearch.appearance.width "Window's width">
+<!ENTITY handysearch.appearance.heightoffset "Window's height offset">
+<!ENTITY handysearch.appearance.backgroundcolor "Background color">
+<!ENTITY handysearch.appearance.displaysearchenginename "Display search engine name">
+<!ENTITY handysearch.appearance.colorofsearchenginename "Color of search engine name">
+<!ENTITY handysearch.appearance.showhelpbutton "Display Help button">
+<!ENTITY handysearch.appearance.showsettingbutton "Display Setting button">
+
+<!ENTITY handysearch.tooltip.singlekeysearch "Select the content of the page. and Press the first letter of the keyword of search engine to search">
+<!ENTITY handysearch.tooltip.restartneeded "Restart Needed">
+
+<!ENTITY handysearch.sko.A "A    Left Tab">
+<!ENTITY handysearch.sko.D "D    Right Tab">
+<!ENTITY handysearch.sko.Q "Q    Back">
+<!ENTITY handysearch.sko.E "E    Forward">
+<!ENTITY handysearch.sko.C "C    New Tab">
+<!ENTITY handysearch.sko.F "F    Refresh">
+
+

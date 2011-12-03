@@ -1,0 +1,30 @@
+﻿<!ENTITY handysearch.other "附加">
+<!ENTITY handysearch.other.singlekeysearch "单键检索">
+<!ENTITY handysearch.other.singlekeysearch.setting "设置">
+<!ENTITY handysearch.other.handynotesearch "检索HanydNote数据库">
+<!ENTITY handysearch.other.singlekeyoperation "Mattmonkey定制的单键操作">
+<!ENTITY handysearch.other.singlekeyoperation.detail "详细">
+
+<!ENTITY handysearch.seleted "The Selected Search Engine">
+<!ENTITY handysearch.seleted.rememberdefaultengine "Remember Default Search Engine">
+<!ENTITY handysearch.seleted.rememberlastusedengine "Remember Last Used Engine">
+
+<!ENTITY handysearch.appearance "外观">
+<!ENTITY handysearch.appearance.width "窗口宽度">
+<!ENTITY handysearch.appearance.heightoffset "窗口高度偏移量">
+<!ENTITY handysearch.appearance.backgroundcolor "背景颜色">
+<!ENTITY handysearch.appearance.displaysearchenginename "显示搜索引擎名称">
+<!ENTITY handysearch.appearance.colorofsearchenginename "搜索引擎名称颜色">
+<!ENTITY handysearch.appearance.showhelpbutton "显示帮助按钮">
+<!ENTITY handysearch.appearance.showsettingbutton "显示设置按钮">
+
+<!ENTITY handysearch.tooltip.singlekeysearch "网页上选中内容. 然后按搜索引擎关键字的第一个字母或数字进行检索">
+<!ENTITY handysearch.tooltip.restartneeded "需要重启">
+
+<!ENTITY handysearch.sko.A "A    左标签">
+<!ENTITY handysearch.sko.D "D    右标签">
+<!ENTITY handysearch.sko.Q "Q    后退">
+<!ENTITY handysearch.sko.E "E    前进">
+<!ENTITY handysearch.sko.C "C    新标签">
+<!ENTITY handysearch.sko.F "F    刷新">
+

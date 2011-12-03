@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="text/javascript" src="ctrlctrl.js"/>
+	<window id="main-window" onkeyup = 'CtrlCtrl.initCtrlCtrlAction(event)'>
+		<keyset>	
+			<key key="q" modifiers="control" oncommand="CtrlCtrl.fireDoubuleCtrl(event)" />
+		</keyset>
+		
+		<keyset id = 'ctrlctrl_keyset' disabled ='true'>		
+			<key key="d" command="Browser:NextTab" />
+			<key key="a" command="Browser:PrevTab" />
+			<key key="c" command="cmd_newNavigatorTab" />
+			<key key="q" command="Browser:Back" />
+			<key key="e" command="Browser:Forward" />
+			<key key="f" command="Browser:Reload" />
+			<key key="s" oncommand="CtrlCtrl.toggleBookmarkToolbar(event)" />
+		</keyset>
+	</window>
+
+</overlay>

@@ -1,0 +1,11 @@
+pref("extensions.handysearch.backgroundcolor", "green");
+pref("extensions.handysearch.enginenamecolor", "orange");
+pref("extensions.handysearch.isshowhelp", true);
+pref("extensions.handysearch.isshowsetting", true);
+pref("extensions.handysearch.issinglekeysearch", true);
+pref("extensions.handysearch.issinglekeyoperation", true);
+pref("extensions.handysearch.heightoffset", 25);
+pref("extensions.handysearch.width", 800);
+pref("extensions.handysearch.interv", 400);
+pref("extensions.handysearch.rule", " ");
+pref("extensions.handysearch.version", "");

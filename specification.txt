@@ -1,0 +1,10 @@
+实现功能：
+Ctrl Ctrl 
+Single Key
+Site specific Page
+
+按键监听机制：
+
+有需求的模块注册到modlues里。有按键触发
+
+

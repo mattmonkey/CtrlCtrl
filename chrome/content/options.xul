@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE prefwindow SYSTEM "chrome://ctrlctrl/locale/overlay.dtd">
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<prefpane>
+		<preferences>
+			<preference id="pref-backgroundcolor" name="extensions.handysearch.backgroundcolor" type="string"/>
+			<preference id="pref-enginenamecolor" name="extensions.handysearch.enginenamecolor" type="string"/>
+			<preference id="pref-showhelp" name="extensions.handysearch.isshowhelp" type="bool"/>
+			<preference id="pref-showsetting" name="extensions.handysearch.isshowsetting" type="bool"/>
+			<preference id="pref-usesinglekeysearch" name="extensions.handysearch.issinglekeysearch" type="bool"/>
+			<preference id="pref-width" name="extensions.handysearch.width" type="int"/>
+			<preference id="pref-heightoffset" name="extensions.handysearch.heightoffset" type="int"/>
+			<preference id="pref-singlekeyoperation" name="extensions.handysearch.issinglekeyoperation" type="bool"/>			
+		</preferences>
+		<groupbox>
+			<caption label='&handysearch.appearance;'/>
+			<hbox>
+				<label value ='&handysearch.appearance.width;'/>
+				<label flex='1'/>
+				<textbox  preference="pref-width"/>
+			</hbox>
+			<hbox>
+				<label value ='&handysearch.appearance.heightoffset;'/>
+				<label flex='1'/>
+				<textbox  preference="pref-heightoffset"/>
+			</hbox>
+			<hbox>
+				<label value='&handysearch.appearance.backgroundcolor;'/>
+				<label flex='1'/>
+				<colorpicker type='button' preference="pref-backgroundcolor"/>
+			</hbox>
+			<hbox>
+				<label value='&handysearch.appearance.colorofsearchenginename;'/>
+				<label flex='1'/>
+				<colorpicker type='button' preference="pref-enginenamecolor"/>
+			</hbox>
+			<checkbox label ='&handysearch.appearance.showhelpbutton;' preference="pref-showhelp"/>
+			<checkbox label ='&handysearch.appearance.showsettingbutton;' preference="pref-showsetting"/>
+		</groupbox>
+		<!--
+		<groupbox>
+			<caption label='&handysearch.seleted;'/>
+			<radiogroup>
+				<radio label ='&handysearch.seleted.rememberdefaultengine;' preference="pref-usedefaultengine"/>
+				<radio label ='&handysearch.seleted.rememberlastusedengine;' preference="pref-uselastengine"/>
+			</radiogroup>
+		</groupbox>
+		-->
+		<groupbox>
+			<caption label='&handysearch.other;'/>
+			<hbox >
+				<checkbox label ='&handysearch.other.singlekeysearch;' preference="pref-usesinglekeysearch"/>
+				<image class ='question-icon'  tooltiptext ='&handysearch.tooltip.singlekeysearch;'/>
+				<label flex='1'/>
+				<button label='&handysearch.other.singlekeysearch.setting;' oncommand='openEngineManage()'/>
+			</hbox>
+			<vbox >
+				<hbox>
+				<checkbox label ='&handysearch.other.singlekeyoperation;' preference="pref-singlekeyoperation"/>
+				<image class ='question-icon'  tooltiptext ='&handysearch.tooltip.restartneeded;'/>
+				<label flex='1'/>
+				<button label='&handysearch.other.singlekeyoperation.detail;' oncommand='toggleDetail()'/>
+				</hbox>
+				<vbox id = 'Detail-Box' collapsed='true'>
+					<label value = '&handysearch.sko.A;'/>
+					<label value = '&handysearch.sko.D;'/>
+					<label value = '&handysearch.sko.Q;'/>
+					<label value = '&handysearch.sko.E;'/>
+					<label value = '&handysearch.sko.C;'/>
+					<label value = '&handysearch.sko.F;'/>
+				</vbox>	
+			</vbox>
+		</groupbox>
+	</prefpane>
+	<script type="text/javascript">
+	<![CDATA[
+		function openEngineManage() {
+			window.openDialog("chrome://browser/content/search/engineManager.xul", "","dialog, centerscreen")
+		}
+		function toggleDetail() {
+			if(document.getElementById('Detail-Box').collapsed){
+				document.getElementById('Detail-Box').collapsed = false;
+				window.innerHeight+=document.getElementById('Detail-Box').clientHeight;
+			}else{
+				window.innerHeight-=document.getElementById('Detail-Box').clientHeight;
+				document.getElementById('Detail-Box').collapsed = true;
+			}
+		}
+	]]>
+	</script>
+</prefwindow>
