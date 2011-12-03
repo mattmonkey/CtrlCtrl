@@ -39,7 +39,7 @@
 		function ParseSearchTxt(value){
 			this.searchStr = (value||"").trim();
 			this.searchTxt = (value||"").trim();
-			this.e`ngines = "";
+			this.engines = "";
 			this.param = "";
 		    var that = this;
 			
