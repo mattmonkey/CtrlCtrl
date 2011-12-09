@@ -4,10 +4,10 @@ var CtrlCtrl = {
 			for each(var kit in CtrlCtrl.ns){
 				if(kit.init) kit.init();
 			}
-		}
-};
+		},
+		ns:{}
+}
 
-CtrlCtrl.ns= {};
 window.addEventListener("load", CtrlCtrl, false);
 
 // 工具库
@@ -114,19 +114,27 @@ CtrlCtrl.lib = {
 		delay ? delay: 0)
 	},
 
+	$GetOS : function(arg){
+		var aWin = arg? arg:window;
+		var ua =  aWin.navigator.userAgent.toLowerCase();
+		if(ua.indexOf("window")!=-1)return "window"
+		if(ua.indexOf("linux")!=-1)return "linux"
+		return win;		
+	},
+
 	checkFirstRun: function() {
 		// 首次安装打开帮助说明
 		var flg = this.$GetPref("firstrun", null);
 		if (!flg) {
 			this.openPage(this.PAGE_WELCOME, true, 3000);
-			this.setPref("firstrun", true);
+			this.$SetPref("firstrun", true);
 		}
 	},
 
 	checkVersion: function() {
 		// 打开版本说明页面
 		var $GetPref = this.$GetPref,
-		setPref = this.setPref,
+		setPref = this.$SetPref,
 		openPage = this.openPage,
 		PAGE_RELEASE_BETA = this.PAGE_BETA_LOG,
 		PAGE_RELEASE = this.PAGE_RELEASE_LOG;
@@ -149,10 +157,6 @@ CtrlCtrl.lib = {
 					// TOTO !!!
 					// 打开版本说明
 					that.openPage(release_url, true, 2000)
-					// 版本升级处理 1.1版本升级到1.2 废弃老数据
-					if (curtVersion == "1.2" && versionRec == "1.1") {
-						setPref({})
-					}
 					setPref.call(that, param, curtVersion);
 				}
 			} catch(e) {
