@@ -1,10 +1,15 @@
-实现功能：
-Ctrl Ctrl 
-Single Key
-Site specific Page
+已实现功能：
 
-按键监听机制：
+1、Ctrl Ctrl 
+2、单键检索
+3、域名书签
+4、页面导航
+5、页面标记
 
-有需求的模块注册到modlues里。有按键触发
 
+
+日志:
+
+2011/12/9
+ssp整合进ctrl ctrl
 
