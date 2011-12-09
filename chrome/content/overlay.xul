@@ -1,111 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script type="text/javascript">
-	<![CDATA[			
-		var CtrlCtrl = {
-			_ctrlStamp : 0,
-			
-			set ctrlStamp(val){		
-			  let c  = val - this._ctrlStamp;
-			    if(val != 0 && c < CCEM.interv){
-			        // 丑陋的方式，应对地址栏的popup和一个未知情况，以后再改。
-			        if(c < 100) return ;										
-					this.fireDoubuleCtrl();
-				}else{
-					this._ctrlStamp = val
-				}
-			},
-			
-			evt:null,
-			
-			getSelectedStr:function(event){
-				let rslt = '';
-		    	if(event && event.originalTarget){
-				    let box = event.originalTarget;
-				    let tagName = box.tagName;
-					if(['html:input','TEXTAREA','INPUT'].indexOf(tagName) > -1){
-				    	rslt = box.value.substring(box.selectionStart,box.selectionEnd);	
-					}else if(tagName =='HTML'){			        
-		    		    rslt = CtrlCtrl.getSelectedStr2();
-					}
-				}
-				return rslt.substr(0,150);
-			},
-
-			getSelectedStr2 :function(){
-				let focusedWindow = document.commandDispatcher.focusedWindow;
-		        return focusedWindow.getSelection().toString().trim();	
-			},
-			
-			fireDoubuleCtrl:function openSecSearchBox(event){
-				let ui = "chrome://ctrlctrl/content/search.xul"
-				let param = ["modal,titlebar=no,dialog,centerscreen,width="+CCEM.width+""];
-				window.openDialog(ui, "ctrl Ctrl", param, CtrlCtrl.getSelectedStr(event==null?CtrlCtrl.evt:event));
-			},
-			
-			initCtrlCtrlAction:function(e){
-				// 连按两次Ctrl判断
-				if(!e.shiftKey && !e.altKey  && e.keyCode == 17){
-					CtrlCtrl.evt = e						
-					CtrlCtrl.ctrlStamp = new Date().getTime();
-				}else{
-					CtrlCtrl.evt = null;
-				    CtrlCtrl.ctrlStamp = 0 // 清除
-				}						
-			},
-
-			init: function(){		
-				var contentArea = getBrowser().mPanelContainer;
-				if (!contentArea) return;
-				 setTimeout(CtrlCtrl.openReleaseNote, 2000);
-				
-				// 单键操作
-				if(CCEM.issinglekeyoperation){
-					document.getElementById('ctrlctrl_keyset').setAttribute('disabled',false)
-				}
-
-				// 单键搜索
-				if(!CCEM.issinglekeysearch) return;
-				contentArea.addEventListener('keyup', function(e){
-					if(!e.shiftKey && !e.altKey && !e.ctrlKey){
-						var key = String.fromCharCode(e.keyCode).toLowerCase()
-						if(!CCEM.getEngine(key)) return; // 检查cache 可能效率高点。其实无所谓吧，响应肯定小于200ms
-						let sel = CtrlCtrl.getSelectedStr2();
-						CCEM.searchByAlias(gBrowser,key,sel)
-					}
-				},false)	
-			},
-
-            // 切换书签工具栏状态
-			toggleBookmarkToolbar:function(){
-			   var ptb = document.getElementById("PersonalToolbar");
-				if(window.setToolbarVisibility!=null){
-					window.setToolbarVisibility(ptb, ptb.collapsed); // Firefox 4
-				}else{
-    				ptb.collapsed =! ptb.collapsed //  Firefox 3
-				}
-			},
-			
-			openReleaseNote:function(){
-				if(CCEM.version<'0.9.5'){
-					 gBrowser.selectedTab = gBrowser.addTab("http://www.ourfirefox.com/archives/1300")
-                   	 CCEM.version = '0.9.5'
-				}
-			}				
-		}
-		
-		Components.utils.import("resource://ctrlctrl/enginemng.js");
-		window.addEventListener("load", CtrlCtrl.init, false);
-		
-
-	]]>
-	</script>
-	
-	<window id="main-window" onkeyup = 'CtrlCtrl.initCtrlCtrlAction(event)'>
+	<script src="util.js" type="application/x-javascript"/>	
+	<script src="ctrlctrl.js" type="application/x-javascript"/>	
+	<script src="marker.js" type="application/x-javascript"/>	
+	<script src="ssp.js" type="application/x-javascript"/>	
+	<window id="main-window" onkeyup = 'CtrlCtrl.ns.handysearch.initCtrlCtrlAction(event)'>
 		<keyset>	
-			<key key="q" modifiers="control" oncommand="CtrlCtrl.fireDoubuleCtrl(event)" />
-		</keyset>
-		
+			<key key="q" modifiers="control" oncommand="CtrlCtrl.ns.handysearch.fireDoubuleCtrl(event)" />
+		</keyset>		
 		<keyset id = 'ctrlctrl_keyset' disabled ='true'>		
 			<key key="d" command="Browser:NextTab" />
 			<key key="a" command="Browser:PrevTab" />
@@ -113,7 +15,13 @@
 			<key key="q" command="Browser:Back" />
 			<key key="e" command="Browser:Forward" />
 			<key key="f" command="Browser:Reload" />
-			<key key="s" oncommand="CtrlCtrl.toggleBookmarkToolbar(event)" />
+			<key key="s" oncommand="CtrlCtrl.lib.toggleBookmarkToolbar(event)" />
+		</keyset>
+		<popupset id='sspage_menu_root'/>
+		<keyset>
+			<key key="z" oncommand = 'CtrlCtrl.ns.sspage.popup()'/>
+			<key key="x" oncommand = 'CtrlCtrl.ns.markers.popup("2")'/>
+			<key key="v" oncommand = 'CtrlCtrl.ns.markers.popup("3")'/>
 		</keyset>
 	</window>
 

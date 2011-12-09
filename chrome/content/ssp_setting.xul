@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://ctrlctrl/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://ctrlctrl/locale/overlay.dtd">
+<window id="wind_setting" title="SSP Setting !"
+	onload = "CtrlCtrl.ns.sspsetting.init()"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script src="util.js" type="application/x-javascript"/>
+	<script src="ssp.js" type="application/x-javascript"/>
+	<script src ="ssp_setting.js" type="application/x-javascript"/>
+		<hbox>
+			<!-- 功能按钮 -->
+			<button label="up" onclick="CtrlCtrl.ns.sspsetting.movePosition(-1)"/>
+			<button label="down" onclick="CtrlCtrl.ns.sspsetting.movePosition(1)"/>
+			<label flex="1"/>
+			<!-- 过滤菜单-->
+			<menulist id='menu_site' type ="menu" label="Site" width ="150" onselect="CtrlCtrl.ns.sspsetting.menuSelectProcessor(event)">
+			  <menupopup id='menup_site'>
+			    <menuitem label="all" cmd='all'/>
+			  </menupopup>
+			</menulist>
+		</hbox>
+	<vbox style="overflow:auto" flex='1'>	
+		<!-- 指定页一览容器-->		
+		<vbox id='vbox_pages' flex='1'> </vbox>
+	</vbox>
+</window>
+

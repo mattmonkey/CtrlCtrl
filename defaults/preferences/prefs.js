@@ -9,3 +9,8 @@ pref("extensions.handysearch.width", 800);
 pref("extensions.handysearch.interv", 400);
 pref("extensions.handysearch.rule", " ");
 pref("extensions.handysearch.version", "");
+
+pref("extensions.handysearch.mapping", "{}");
+pref("extensions.handysearch.tags",'["h1","h2","h3"]');
+pref("extensions.handysearch.lastedmarks",'{}');
+
