@@ -16,10 +16,18 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 			}
 
 			if (evt == null) evt = e;
-			// 同一个控件上，两次Ctrl才有效
-			if (evt.originalTarget !== e.originalTarget) return;
+			
+			// 检查是否是同一个控件的两次Ctrl
+			if (evt.originalTarget !== e.originalTarget){
+				$Log("call setCtrlStamp  : " + e.originalTarget.tagName);
+				$Log("call setCtrlStamp  : " + evt.originalTarget.tagName);
+				evt = null;
+				_ctrlStamp = val;
+				return ;
+			}
 			evt = e;
 
+			// 检查两次Ctrl间的间隔
 			let c = val - _ctrlStamp;
 			if (c > 0 && c < CCEM.interv) {
 				$Log("call setCtrlStamp interv : " + c);
@@ -58,14 +66,16 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 			}
 
 			// 单键搜索
-			if (!CCEM.issinglekeysearch) return;
-			contentArea.addEventListener('keyup', function(e) {
+			if (CCEM.issinglekeysearch) {
+				contentArea.addEventListener('keyup', searchBySingleKey,false);
+			}
+		}
+
+		function searchBySingleKey(e){
 				if (e.shiftKey || e.altKey || e.ctrlKey) return;
 				var key = String.fromCharCode(e.keyCode).toLowerCase()
 				if (!CCEM.getEngine(key)) return;
-				CCEM.searchByAlias(gBrowser, key, getSelectedStrFromPage());
-			},
-			false);
+				CCEM.searchByAlias(gBrowser, key, getSelectedStrFromPage());		
 		}
 
 		function fireDoubuleCtrl(event) {

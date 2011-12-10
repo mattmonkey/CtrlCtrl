@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <style>
+        .float{ position: absolute; border: 2px solid red; background-color: #EFEFEF;
+        z-index:1000; width:200px; }
+    </style>
+    <script type="text/javascript">
+        function fix() {
+            document.getElementById("contents").style.top = 10 + document.documentElement.scrollTop + "px";
+            document.getElementById("contents").style.left = "10px";
+        }
+
+        window.onscroll = fix;
+        window.onresize = fix;
+        window.onload = fix;
+    </script>
+    
+    <body>
+        <div class="float" id="contents">
+            Ctrl Ctrl主要功能：
+            <br/>
+            <ul>
+                <li>
+                    独立的检索窗口
+                    <ul>
+                        检索参数
+                        <li>
+                            站内检索 !
+                        </li>
+                        <li>
+                            多重检索 @
+                        </li>
+                        <li>
+                            分别检索 $
+                        </li>
+                        <li>
+                            组合检索 #
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    单键检索
+                </li>
+                <li>
+                    单键操作
+                    <ul>
+                        <li>
+                            标签右选 d
+                        </li>
+                        <li>
+                            标签左选 a
+                        </li>
+                        <li>
+                            书签伸缩 s
+                        </li>
+                        <li>
+                            历史后退 q
+                        </li>
+                        <li>
+                            历史前进 e
+                        </li>
+                        <li>
+                            页面刷新 F
+                        </li>
+                        <li>
+                            标签新建 c
+                        </li>
+                        <li>
+                            站内导航 z
+                        </li>
+                        <li>
+                            页面目录 x
+                        </li>
+                        <li>
+                            页面标记 v
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <table border="0">
+            <tr>
+                <td width="500">
+                </td>
+                <td>
+                    <div>
+                        <h1>
+                            Ctrl Ctrl 0.9.6 版本帮助
+                        </h1>
+                        <h2>
+                            常用操作
+                            <h2/>
+                            <img src="http://farm8.staticflickr.com/7147/6471325997_1d9d61a8cd_b.jpg">
+                    </div>
+                    <div>
+                        <h2>
+                            站内导航
+                            <h2/>
+                            <img src="http://farm8.staticflickr.com/7170/6429230691_e84e0c7ee4_b.jpg">
+                    </div>
+                    <div>
+                        <h2>
+                            页面目录
+                            <h2/>
+                            <img src="http://farm8.staticflickr.com/7023/6453136025_e702ba4277_b.jpg">
+                    </div>
+                    <div>
+                        <h2>
+                            页面标记
+                            <h2/>
+                            <img src="http://farm8.staticflickr.com/7147/6471325997_1d9d61a8cd_b.jpg">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </body>
+
+</html>
+

@@ -26,6 +26,9 @@
 <!ENTITY handysearch.sko.Q "Q    Back">
 <!ENTITY handysearch.sko.E "E    Forward">
 <!ENTITY handysearch.sko.C "C    New Tab">
+<!ENTITY handysearch.sko.S "S    Toggle Bookmarks Toolbar">
 <!ENTITY handysearch.sko.F "F    Refresh">
-
+<!ENTITY handysearch.sko.z "Z    Site Specific Pages">
+<!ENTITY handysearch.sko.X "X    Page Contents">
+<!ENTITY handysearch.sko.V "V    Page Marker">
 

@@ -26,5 +26,9 @@
 <!ENTITY handysearch.sko.Q "Q    后退">
 <!ENTITY handysearch.sko.E "E    前进">
 <!ENTITY handysearch.sko.C "C    新标签">
+<!ENTITY handysearch.sko.S "S    伸缩书签工具条">
 <!ENTITY handysearch.sko.F "F    刷新">
+<!ENTITY handysearch.sko.Z "Z    站内导航">
+<!ENTITY handysearch.sko.X "X    页面目录">
+<!ENTITY handysearch.sko.V "V    页面标记">
 

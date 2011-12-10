@@ -2,6 +2,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <!DOCTYPE prefwindow SYSTEM "chrome://ctrlctrl/locale/overlay.dtd">
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script src="util.js" type="application/x-javascript"/>		
 	<prefpane>
 		<preferences>
 			<preference id="pref-backgroundcolor" name="extensions.handysearch.backgroundcolor" type="string"/>
@@ -11,7 +12,18 @@
 			<preference id="pref-usesinglekeysearch" name="extensions.handysearch.issinglekeysearch" type="bool"/>
 			<preference id="pref-width" name="extensions.handysearch.width" type="int"/>
 			<preference id="pref-heightoffset" name="extensions.handysearch.heightoffset" type="int"/>
-			<preference id="pref-singlekeyoperation" name="extensions.handysearch.issinglekeyoperation" type="bool"/>			
+			<preference id="pref-singlekeyoperation" name="extensions.handysearch.issinglekeyoperation" type="bool"/>
+			
+			<preference id="pref-a" name="extensions.handysearch.opt.a" type="bool"/>			
+			<preference id="pref-d" name="extensions.handysearch.opt.d" type="bool"/>			
+			<preference id="pref-e" name="extensions.handysearch.opt.e" type="bool"/>			
+			<preference id="pref-q" name="extensions.handysearch.opt.q" type="bool"/>			
+			<preference id="pref-f" name="extensions.handysearch.opt.f" type="bool"/>			
+			<preference id="pref-c" name="extensions.handysearch.opt.c" type="bool"/>			
+			<preference id="pref-s" name="extensions.handysearch.opt.s" type="bool"/>			
+			<preference id="pref-z" name="extensions.handysearch.opt.z" type="bool"/>			
+			<preference id="pref-x" name="extensions.handysearch.opt.x" type="bool"/>			
+			<preference id="pref-v" name="extensions.handysearch.opt.v" type="bool"/>			
 		</preferences>
 		<groupbox>
 			<caption label='&handysearch.appearance;'/>
@@ -38,15 +50,6 @@
 			<checkbox label ='&handysearch.appearance.showhelpbutton;' preference="pref-showhelp"/>
 			<checkbox label ='&handysearch.appearance.showsettingbutton;' preference="pref-showsetting"/>
 		</groupbox>
-		<!--
-		<groupbox>
-			<caption label='&handysearch.seleted;'/>
-			<radiogroup>
-				<radio label ='&handysearch.seleted.rememberdefaultengine;' preference="pref-usedefaultengine"/>
-				<radio label ='&handysearch.seleted.rememberlastusedengine;' preference="pref-uselastengine"/>
-			</radiogroup>
-		</groupbox>
-		-->
 		<groupbox>
 			<caption label='&handysearch.other;'/>
 			<hbox >
@@ -57,35 +60,57 @@
 			</hbox>
 			<vbox >
 				<hbox>
-				<checkbox label ='&handysearch.other.singlekeyoperation;' preference="pref-singlekeyoperation"/>
+				<checkbox id="sko-checkbox" label ='&handysearch.other.singlekeyoperation;' preference="pref-singlekeyoperation" oncommand="disableDetail(event)"/>
 				<image class ='question-icon'  tooltiptext ='&handysearch.tooltip.restartneeded;'/>
 				<label flex='1'/>
 				<button label='&handysearch.other.singlekeyoperation.detail;' oncommand='toggleDetail()'/>
 				</hbox>
 				<vbox id = 'Detail-Box' collapsed='true'>
-					<label value = '&handysearch.sko.A;'/>
-					<label value = '&handysearch.sko.D;'/>
-					<label value = '&handysearch.sko.Q;'/>
-					<label value = '&handysearch.sko.E;'/>
-					<label value = '&handysearch.sko.C;'/>
-					<label value = '&handysearch.sko.F;'/>
+					<checkbox  label  = '&handysearch.sko.A;'  preference="pref-a"/>
+					<checkbox  label  = '&handysearch.sko.D;'  preference="pref-d"/>
+					<checkbox  label  = '&handysearch.sko.Q;'  preference="pref-q"/>
+					<checkbox  label  = '&handysearch.sko.E;'  preference="pref-e"/>
+					<checkbox  label  = '&handysearch.sko.C;'  preference="pref-c"/>
+					<checkbox  label  = '&handysearch.sko.S;'  preference="pref-s"/>
+					<checkbox  label  = '&handysearch.sko.F;'  preference="pref-f"/>
+					<checkbox  label  = '&handysearch.sko.Z;'  preference="pref-z"/>
+					<checkbox  label  = '&handysearch.sko.X;'  preference="pref-x"/>
+					<checkbox  label  = '&handysearch.sko.V;'  preference="pref-v"/>
 				</vbox>	
 			</vbox>
 		</groupbox>
 	</prefpane>
 	<script type="text/javascript">
-	<![CDATA[
-		function openEngineManage() {
-			window.openDialog("chrome://browser/content/search/engineManager.xul", "","dialog, centerscreen")
-		}
-		function toggleDetail() {
-			if(document.getElementById('Detail-Box').collapsed){
-				document.getElementById('Detail-Box').collapsed = false;
-				window.innerHeight+=document.getElementById('Detail-Box').clientHeight;
-			}else{
-				window.innerHeight-=document.getElementById('Detail-Box').clientHeight;
-				document.getElementById('Detail-Box').collapsed = true;
-			}
+			<![CDATA[
+			with(CtrlCtrl.lib){
+					function disableDetail(event){
+						var status = !event.target.checked
+						var box = $("Detail-Box").firstChild
+						
+						while(box){
+							$Attr(box,"disabled",status);
+							box = box.nextSibling;
+						}
+					}
+
+					function openEngineManage() {
+						window.openDialog("chrome://browser/content/search/engineManager.xul", "","dialog, centerscreen")
+					}
+					
+					function toggleDetail() {
+						if($('Detail-Box').collapsed){
+							$('Detail-Box').collapsed = false;
+							window.innerHeight+=$('Detail-Box').clientHeight;
+						}else{
+							window.innerHeight-=$('Detail-Box').clientHeight;
+							$('Detail-Box').collapsed = true;
+						}
+						window.screenY = (screen.height - window.innerHeight)/2;
+					
+					}
+						
+					disableDetail({target:$("sko-checkbox")})
+
 		}
 	]]>
 	</script>

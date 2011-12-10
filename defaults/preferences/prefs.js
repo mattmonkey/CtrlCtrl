@@ -10,6 +10,19 @@ pref("extensions.handysearch.interv", 400);
 pref("extensions.handysearch.rule", " ");
 pref("extensions.handysearch.version", "");
 
+pref("extensions.handysearch.sko.a",true);
+pref("extensions.handysearch.sko.d",true);
+pref("extensions.handysearch.sko.s",true);
+pref("extensions.handysearch.sko.q",true);
+pref("extensions.handysearch.sko.e",true);
+pref("extensions.handysearch.sko.f",true);
+pref("extensions.handysearch.sko.c",true);
+pref("extensions.handysearch.sko.e",true);
+pref("extensions.handysearch.sko.z",true);
+pref("extensions.handysearch.sko.x",true);
+pref("extensions.handysearch.sko.v",true);
+
+
 pref("extensions.handysearch.mapping", "{}");
 pref("extensions.handysearch.tags",'["h1","h2","h3"]');
 pref("extensions.handysearch.lastedmarks",'{}');

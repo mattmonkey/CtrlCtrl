@@ -16,13 +16,10 @@
 			<key key="e" command="Browser:Forward" />
 			<key key="f" command="Browser:Reload" />
 			<key key="s" oncommand="CtrlCtrl.lib.toggleBookmarkToolbar(event)" />
-		</keyset>
-		<popupset id='sspage_menu_root'/>
-		<keyset>
 			<key key="z" oncommand = 'CtrlCtrl.ns.sspage.popup()'/>
 			<key key="x" oncommand = 'CtrlCtrl.ns.markers.popup("2")'/>
 			<key key="v" oncommand = 'CtrlCtrl.ns.markers.popup("3")'/>
 		</keyset>
+		<popupset id='sspage_menu_root'/>
 	</window>
-
 </overlay>
