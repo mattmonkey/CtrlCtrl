@@ -1,88 +1,119 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <style>
+        .float{ position: absolute; border: 2px solid red; background-color: #EFEFEF;
+        z-index:1000; width:200px; }
+    </style>
+    <script type="text/javascript">
+        function fix() {
+            document.getElementById("contents").style.top = 10 + document.documentElement.scrollTop + "px";
+            document.getElementById("contents").style.left = "10px";
+        }
 
-  <title>mattmonkey/CtrlCtrl @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #59ecd1;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #a6132e; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #a6132e; }
-    h3 { text-align: center; color: #a6132e; }
-    a { color: #a6132e; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
-
-<body>
-  <a href="https://github.com/mattmonkey/CtrlCtrl"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-
-    <div class="download">
-      <a href="https://github.com/mattmonkey/CtrlCtrl/zipball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
-      <a href="https://github.com/mattmonkey/CtrlCtrl/tarball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
-    </div>
-
-    <h1><a href="https://github.com/mattmonkey/CtrlCtrl">CtrlCtrl</a>
-      <span class="small">by <a href="https://github.com/mattmonkey">mattmonkey</a></span></h1>
-
-    <div class="description">
-      a firefox addon
-    </div>
-
+        window.onscroll = fix;
+        window.onresize = fix;
+        window.onload = fix;
+    </script>
     
+    <body>
+        <div class="float" id="contents">
+            Ctrl Ctrl主要功能：
+            <br/>
+            <ul>
+                <li>
+                    独立的检索窗口
+                    <ul>
+                        检索参数
+                        <li>
+                            站内检索 !
+                        </li>
+                        <li>
+                            多重检索 @
+                        </li>
+                        <li>
+                            分别检索 $
+                        </li>
+                        <li>
+                            组合检索 #
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    单键检索
+                </li>
+                <li>
+                    单键操作
+                    <ul>
+                        <li>
+                            标签右选 d
+                        </li>
+                        <li>
+                            标签左选 a
+                        </li>
+                        <li>
+                            书签伸缩 s
+                        </li>
+                        <li>
+                            历史后退 q
+                        </li>
+                        <li>
+                            历史前进 e
+                        </li>
+                        <li>
+                            页面刷新 F
+                        </li>
+                        <li>
+                            标签新建 c
+                        </li>
+                        <li>
+                            站内导航 z
+                        </li>
+                        <li>
+                            页面目录 x
+                        </li>
+                        <li>
+                            页面标记 v
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <table border="0">
+            <tr>
+                <td width="500">
+                </td>
+                <td>
+                    <div>
+                        <h1>
+                            Ctrl Ctrl 0.9.6 版本帮助
+                        </h1>
+                        <h2>
+                            常用操作
+                            <h2/>
+                            <img src="http://farm8.staticflickr.com/7147/6471325997_1d9d61a8cd_b.jpg">
+                    </div>
+                    <div>
+                        <h2>
+                            站内导航
+                            <h2/>
+                            <img src="http://farm8.staticflickr.com/7170/6429230691_e84e0c7ee4_b.jpg">
+                    </div>
+                    <div>
+                        <h2>
+                            页面目录
+                            <h2/>
+                            <img src="http://farm8.staticflickr.com/7023/6453136025_e702ba4277_b.jpg">
+                    </div>
+                    <div>
+                        <h2>
+                            页面标记
+                            <h2/>
+                            <img src="http://farm8.staticflickr.com/7147/6471325997_1d9d61a8cd_b.jpg">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </body>
 
-    
-
-    
-
-    
-
-    
-      <h2>Authors</h2>
-      <p>matt (mattmonkey@sina.com)<br/>      </p>
-    
-
-    
-      <h2>Contact</h2>
-      <p> (mattmonkey@sina.com)<br/>      </p>
-    
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="https://github.com/mattmonkey/CtrlCtrl/zipball/master">zip</a> or
-      <a href="https://github.com/mattmonkey/CtrlCtrl/tarball/master">tar formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/mattmonkey/CtrlCtrl</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="https://github.com/mattmonkey/CtrlCtrl">mattmonkey/CtrlCtrl</a>
-    </div>
-
-  </div>
-
-</body>
 </html>
+
