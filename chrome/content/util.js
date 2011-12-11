@@ -5,7 +5,7 @@ var CtrlCtrl = {
 				if(kit.init) kit.init();
 			}
 			CtrlCtrl.lib.checkVersion();
-			//CtrlCtrl.lib.checkFirstRun();
+			CtrlCtrl.lib.checkFirstRun();
 		},
 		ns:{}
 }
@@ -15,7 +15,7 @@ window.addEventListener("load", CtrlCtrl, false);
 // ¹¤¾ß¿â
 CtrlCtrl.lib = {
 	css: Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService),
-	PAGE_WELCOME: "http://code.google.com/p/site-specific-pages/",
+	PAGE_WELCOME: "http://mattmonkey.github.com/CtrlCtrl/#t_releasenote",
 	PREF_PREFIX: "extensions.handysearch.",
 	PAGE_RELEASE_LOG: "http://mattmonkey.github.com/CtrlCtrl/",
 	PAGE_BETA_LOG: "http://mattmonkey.github.com/CtrlCtrl/",
@@ -26,7 +26,7 @@ CtrlCtrl.lib = {
 	},
 
 	$Log: function log2(val) {
-		// if (DBRUtil.getPref('debug', null)) 
+		//if (DBRUtil.getPref('debug', null)) 
 		this.css.logStringMessage(this.ADDON_ID + " debug : " + val)
 	},
 

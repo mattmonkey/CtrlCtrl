@@ -2,7 +2,7 @@
 <?xml-stylesheet href="chrome://ctrlctrl/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://ctrlctrl/locale/overlay.dtd">
 <window id="wind_setting" title="SSP Setting !"
-	onload = "CtrlCtrl.ns.sspsetting.init()"
+	onload = "CtrlCtrl.ns.sspsetting.load()"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script src="util.js" type="application/x-javascript"/>
 	<script src="ssp.js" type="application/x-javascript"/>

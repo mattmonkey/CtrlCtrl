@@ -9,7 +9,7 @@ if (typeof CtrlCtrl != "undefined") {
 
 		// ------ public method ------
 		// 页面初始化
-		this.init = function() {
+		this.load = function() {
 
 			// 加入站点及指定页信息
 			for (var domain in mapping) {

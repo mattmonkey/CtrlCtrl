@@ -170,7 +170,6 @@ if (typeof CtrlCtrl != "undefined") {
 				title: title,
 				url: url
 			}
-			alert(title)
 			var siteInfo = mapping[host];
 			// 初始站点信息
 			if (siteInfo == undefined) {
