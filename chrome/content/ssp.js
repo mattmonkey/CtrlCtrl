@@ -29,8 +29,6 @@ if (typeof CtrlCtrl != "undefined") {
 				command: itemClickProcessor,
 				popupshowing: menuCreater
 			})
-			checkVersion();
-			checkFirstRun();
 		}
 
 		// 刷新页面参数。（host,url,title）

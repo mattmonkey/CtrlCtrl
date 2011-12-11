@@ -1,6 +1,7 @@
 Components.utils.import("resource://ctrlctrl/enginemng.js");
 var tabs, searchBox;
-var flg = false
+var flg = false;
+var PAGE_HELP = "http://mattmonkey.github.com/CtrlCtrl/";
 
 // 初始化界面
 function init() {
@@ -213,7 +214,7 @@ function openSettingWin() {
 
 // 打开帮助页面
 function openHelpPage() {
-	window.opener.gBrowser.selectedTab = window.opener.gBrowser.addTab("http://www.ourfirefox.com/archives/1023");
+	window.opener.gBrowser.selectedTab = window.opener.gBrowser.addTab(PAGE_HELP);
 	window.close();
 }
 

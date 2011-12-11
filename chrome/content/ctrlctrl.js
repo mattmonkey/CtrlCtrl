@@ -16,14 +16,14 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 			}
 
 			if (evt == null) evt = e;
-			
+
 			// 检查是否是同一个控件的两次Ctrl
-			if (evt.originalTarget !== e.originalTarget){
+			if (evt.originalTarget !== e.originalTarget) {
 				$Log("call setCtrlStamp  : " + e.originalTarget.tagName);
 				$Log("call setCtrlStamp  : " + evt.originalTarget.tagName);
 				evt = null;
 				_ctrlStamp = val;
-				return ;
+				return;
 			}
 			evt = e;
 
@@ -59,23 +59,40 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 		function init() {
 			var contentArea = gBrowser.mPanelContainer;
 			if (!contentArea) return;
-
 			// 单键操作
 			if (CCEM.issinglekeyoperation) {
 				$Attr('ctrlctrl_keyset', 'disabled', false);
+				for (var i = 97; i <= 122; i++) {
+					try {
+						var c = String.fromCharCode(i);
+						if (!$GetPref("sko." + c, false)) continue;
+						var cmd = $GetPref("sko." + c + "2", ""),
+						evtName = /\(*\)/.test(cmd) ? "oncommand": "command";
+						var data = {};
+						data.key = c;
+						data[evtName] = cmd;
+						ce("key", "ctrlctrl_keyset", data);
+						$Log("call init " + c + " | " + evtName + " | " + cmd)
+					} catch(e) {
+						$Log("error " + e)
+					}
+				}
+
 			}
 
 			// 单键搜索
 			if (CCEM.issinglekeysearch) {
-				contentArea.addEventListener('keyup', searchBySingleKey,false);
+				contentArea.addEventListener('keyup', searchBySingleKey, false);
 			}
+
+			window.addEventListener('keyup', initCtrlCtrlAction, false);
 		}
 
-		function searchBySingleKey(e){
-				if (e.shiftKey || e.altKey || e.ctrlKey) return;
-				var key = String.fromCharCode(e.keyCode).toLowerCase()
-				if (!CCEM.getEngine(key)) return;
-				CCEM.searchByAlias(gBrowser, key, getSelectedStrFromPage());		
+		function searchBySingleKey(e) {
+			if (e.shiftKey || e.altKey || e.ctrlKey) return;
+			var key = String.fromCharCode(e.keyCode).toLowerCase()
+			if (!CCEM.getEngine(key)) return;
+			CCEM.searchByAlias(gBrowser, key, getSelectedStrFromPage());
 		}
 
 		function fireDoubuleCtrl(event) {

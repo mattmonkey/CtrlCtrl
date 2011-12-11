@@ -14,16 +14,16 @@
 			<preference id="pref-heightoffset" name="extensions.handysearch.heightoffset" type="int"/>
 			<preference id="pref-singlekeyoperation" name="extensions.handysearch.issinglekeyoperation" type="bool"/>
 			
-			<preference id="pref-a" name="extensions.handysearch.opt.a" type="bool"/>			
-			<preference id="pref-d" name="extensions.handysearch.opt.d" type="bool"/>			
-			<preference id="pref-e" name="extensions.handysearch.opt.e" type="bool"/>			
-			<preference id="pref-q" name="extensions.handysearch.opt.q" type="bool"/>			
-			<preference id="pref-f" name="extensions.handysearch.opt.f" type="bool"/>			
-			<preference id="pref-c" name="extensions.handysearch.opt.c" type="bool"/>			
-			<preference id="pref-s" name="extensions.handysearch.opt.s" type="bool"/>			
-			<preference id="pref-z" name="extensions.handysearch.opt.z" type="bool"/>			
-			<preference id="pref-x" name="extensions.handysearch.opt.x" type="bool"/>			
-			<preference id="pref-v" name="extensions.handysearch.opt.v" type="bool"/>			
+			<preference id="pref-a" name="extensions.handysearch.sko.a" type="bool"/>			
+			<preference id="pref-d" name="extensions.handysearch.sko.d" type="bool"/>			
+			<preference id="pref-e" name="extensions.handysearch.sko.e" type="bool"/>			
+			<preference id="pref-q" name="extensions.handysearch.sko.q" type="bool"/>			
+			<preference id="pref-f" name="extensions.handysearch.sko.f" type="bool"/>			
+			<preference id="pref-c" name="extensions.handysearch.sko.c" type="bool"/>			
+			<preference id="pref-s" name="extensions.handysearch.sko.s" type="bool"/>			
+			<preference id="pref-z" name="extensions.handysearch.sko.z" type="bool"/>			
+			<preference id="pref-x" name="extensions.handysearch.sko.x" type="bool"/>			
+			<preference id="pref-v" name="extensions.handysearch.sko.v" type="bool"/>			
 		</preferences>
 		<groupbox>
 			<caption label='&handysearch.appearance;'/>

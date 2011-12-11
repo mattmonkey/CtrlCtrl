@@ -2,7 +2,7 @@
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-		 <RDF:Description RDF:about="rdf:#$jrSsa"
+		 <RDF:Description RDF:about="rdf:#$tv5tO2"
 				   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
 		  		   em:type="2"
                    em:minVersion="4.0"
@@ -10,11 +10,11 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="handysearch@mattmonkey"
                    em:name="Ctrl Ctrl"
-				   em:version="0.9.7"
+				   em:version="0.9.6"
                    em:creator="mattmonkey"
                    em:description="twice ctrl"
                    em:homepageURL="https://github.com/mattmonkey/CtrlCtrl"
                    em:optionsURL="chrome://ctrlctrl/content/options.xul">
-    <em:targetApplication RDF:resource="rdf:#$jrSsa"/>
+    <em:targetApplication RDF:resource="rdf:#$tv5tO2"/>
   </RDF:Description>
 </RDF:RDF>

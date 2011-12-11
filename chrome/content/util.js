@@ -4,6 +4,8 @@ var CtrlCtrl = {
 			for each(var kit in CtrlCtrl.ns){
 				if(kit.init) kit.init();
 			}
+			CtrlCtrl.lib.checkVersion();
+			//CtrlCtrl.lib.checkFirstRun();
 		},
 		ns:{}
 }
@@ -15,8 +17,8 @@ CtrlCtrl.lib = {
 	css: Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService),
 	PAGE_WELCOME: "http://code.google.com/p/site-specific-pages/",
 	PREF_PREFIX: "extensions.handysearch.",
-	PAGE_RELEASE_LOG: "http://site-specific-pages.googlecode.com/svn/trunk/RELEASE_CHANGE_LOG.txt",
-	PAGE_BETA_LOG: "http://site-specific-pages.googlecode.com/svn/trunk/BETA_CHANGE_LOG.txt",
+	PAGE_RELEASE_LOG: "http://mattmonkey.github.com/CtrlCtrl/",
+	PAGE_BETA_LOG: "http://mattmonkey.github.com/CtrlCtrl/",
 	ADDON_ID: "handysearch@mattmonkey",
 	TLDS: Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService),
 	$: function $(id) {
@@ -52,6 +54,11 @@ CtrlCtrl.lib = {
 
 	get $Doc() {
 		return document.commandDispatcher.focusedWindow.document;
+	},
+
+	$HasPrefValue : function(key){
+		var pref =Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+		return  pref.prefHasUserValue(this.PREF_PREFIX + key);
 	},
 
 	$SetPref: function() {

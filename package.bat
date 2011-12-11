@@ -16,6 +16,7 @@ MKDIR %pdir%
 echo 复制目录和文件...
 ROBOCOPY chrome %pdir%\chrome /E /XA:H /XD .svn
 ROBOCOPY defaults %pdir%\defaults /E /XA:H /XD .svn
+ROBOCOPY modules %pdir%\modules /E /XA:H /XD .svn
 COPY chrome.manifest %pdir% 
 COPY install.rdf %pdir% 
 COPY LICENSE.txt %pdir%
