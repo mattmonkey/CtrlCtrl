@@ -1,0 +1,32 @@
+.float{				
+ 	position:fixed;
+    tOP:5;
+    _top:expression((document.compatMode=="CSS1Compat")?documentElement.scrollTop:document.body.scrollTop);
+    _position:absolute;
+    left:5;
+    z-index:1000; width:200px; }
+
+h1 {
+font-family: Arial, sans-serif;
+font-size: 24px;
+color: #fff;
+padding: 4px;
+background-color: #696;
+} 
+
+h2 span {
+font-family: Arial, sans-serif;
+font-size: 24px;
+color: #369;
+padding-bottom: 4px;
+border-bottom: 2px solid #999;
+} 
+
+p {
+line-height:120%;
+text-align:left;
+text-indent:2em;
+word-spacing:2px;
+vertical-align:top;
+}
+

@@ -1,45 +1,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <style>
-        .float{ position: absolute; border: 2px solid red; background-color: #EFEFEF;
-        z-index:1000; width:200px; }
-    </style>
-    <script type="text/javascript">
-        function fix() {
-            document.getElementById("contents").style.top = 10 + document.documentElement.scrollTop + "px";
-            document.getElementById("contents").style.left = "10px";
-        }
-
-        window.onscroll = fix;
-        window.onresize = fix;
-        window.onload = fix;
-    </script>
+    
+    <head>
+        <title>
+            Ctrl Ctrl
+        </title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+    </head>
     
     <body>
         <div class="float" id="contents">
-            Ctrl Ctrl主要功能：
+            Ctrl Ctrl机能一览
             <br/>
             <ul>
                 <li>
-                    独立的检索窗口
+                    独立检索
                     <ul>
-                        检索参数
                         <li>
-                            站内检索 !
+                            <a href="#t_searchbysite">
+                                站内检索 !
+                            </a>
                         </li>
                         <li>
-                            多重检索 @
+                            <a href="#t_mutlisearch">
+                                多重检索 @
+                            </a>
+                        </li>
+						<li>
+						<a href="#t_mutlisearch2">
+								分别检索 $
+						</a>		
                         </li>
                         <li>
-                            分别检索 $
-                        </li>
-                        <li>
-                            组合检索 #
+                        <a href="#t_combisearch">
+								组合检索 $#
+								</a>		
                         </li>
                     </ul>
                 </li>
                 <li>
-                    单键检索
+                    <a href="#t_singlekeysearch">
+                        单键检索
+                    </a>
                 </li>
                 <li>
                     单键操作
@@ -60,60 +62,199 @@
                             历史前进 e
                         </li>
                         <li>
-                            页面刷新 F
+                            页面刷新 f
                         </li>
                         <li>
                             标签新建 c
                         </li>
                         <li>
-                            站内导航 z
+                            <a href="#t_sitenavigater">
+                                站内导航 z
+                            </a>
                         </li>
                         <li>
-                            页面目录 x
+                            <a href="#t_pagecontent">
+                                页面目录 x
+                            </a>
                         </li>
                         <li>
-                            页面标记 v
+                            <a href="#t_pagemarker">
+                                页面标记 v
+                            </a>
                         </li>
                     </ul>
                 </li>
             </ul>
+            其他
+            </br>
+            <ul>
+                <li>
+                    <a href="#t_enginesetting">设置引擎别名</a>
+                </li>
+                <li>
+                    <a href="#t_releasenote">版本升级说明</a>
+                </li>
+                <li>
+				<a href="#t_ssp">SSP数据迁移</a>
+				</li>
+		</ul>
+		  联系: mattmonkey@sina.com
         </div>
-        <table border="0">
-            <tr>
-                <td width="500">
-                </td>
-                <td>
-                    <div>
-                        <h1>
-                            Ctrl Ctrl 0.9.6 版本帮助
-                        </h1>
-                        <h2>
-                            常用操作
-                            <h2/>
-                            <img src="http://farm8.staticflickr.com/7147/6471325997_1d9d61a8cd_b.jpg">
-                    </div>
-                    <div>
-                        <h2>
-                            站内导航
-                            <h2/>
-                            <img src="http://farm8.staticflickr.com/7170/6429230691_e84e0c7ee4_b.jpg">
-                    </div>
-                    <div>
-                        <h2>
-                            页面目录
-                            <h2/>
-                            <img src="http://farm8.staticflickr.com/7023/6453136025_e702ba4277_b.jpg">
-                    </div>
-                    <div>
-                        <h2>
-                            页面标记
-                            <h2/>
-                            <img src="http://farm8.staticflickr.com/7147/6471325997_1d9d61a8cd_b.jpg">
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </body>
+        <div style="margin-left:220px">
+            <h1>
+                Ctrl Ctrl 0.9.6
+		</h1>
+		            <div>
+                <h2>
+                    <span id="t_pagemarker">
+                        Ctrl Ctrl 是什么？
+                    </span>
+                    <h2/>
+							<p>
+							单键导向的大杂烩扩展。涵盖检索增强、操作定制、浏览管理等功能。
+							</p>
+			</div>
+
+            <div>
+                <h2>
+                    <span>
+                        独立检索窗口
+                    </span>
+                    <h2/>
+                    <p>
+                        快速按两下Ctrl，可调出一个独立的检索窗口。
+                    </p>
+                    <p>
+                        在网页或者输入框选择文字，按两下Ctrl，该文字会被传递给检索窗口
+                    </p>
+                    <img src="pic/4.png">
+            </div>
+            <div>
+                <h2 id="t_searchbysite">
+                    <span>
+                        站内检索
+                    </span>
+					<h2/>
+							<p>
+								检索内容 + 空格 + ! 可以利用搜索引擎的site参数对当前网站进行站内检索
+							</p>		
+                    <img src="pic/1.png">
+            </div>
+            <div>
+                <h2>
+                    <span id="t_mutlisearch">
+                        多重检索
+                    </span>
+                    <h2/>
+                    <p>
+                        输入@后，检索窗口会列出有别名的搜索引擎。选择想使用的别名后加上空格区隔检索内容。图例：使用豆瓣读书和新浪共享两个引擎检索“逻辑新引”
+                    </p>
+                    <img src="pic/2.png">
+            </div>
+            <div>
+                <h2>
+						<span id="t_mutlisearch2">
+                        分别检索
+                    </span>
+					<h2/>
+							<p>图例：使用百度引擎 分别检索firefox，chrome，ie三个关键词</p>
+                    <img src="pic/3.png">
+            </div>
+            <div>
+                <h2 id="t_combisearch">
+                    <span>
+                        组合检索
+                    </span>
+                    <h2/>
+							<p>图例：使用默认的谷歌引擎 分别检索"mdn firefox"，"mdn chrome"，"mdn ie" 三个关键词</p>
+                    <img src="pic/5.png">
+            </div>
+            <div>
+                <h2>
+                    <span id="t_singlekeysearch">
+                        单键检索
+                    </span>
+					<h2/>
+							<p>选择文字，按下搜索引擎的别名进行检索</p>
+                    <img src="pic/singlekeysearch.png">
+            </div>
+            <div>
+                <h2>
+                    <span id="t_sitenavigater">
+                        站内导航
+                    </span>
+					<h2/>
+							<p>
+							它以域名为单位（通常情况是网站），收集、管理、跳转到指定的页面。
+							</p>
+                    <img src="http://farm8.staticflickr.com/7170/6429230691_e84e0c7ee4_b.jpg">
+            </div>
+            <div>
+                <h2>
+                    <span id="t_pagecontent">
+                        页面目录
+                    </span>
+                    <h2/>
+							<p>
+						读取网页中的标题作为导航目标。
+							</p>
+                    <img src="http://farm8.staticflickr.com/7023/6453136025_e702ba4277_b.jpg">
+            </div>
+            <div>
+                <h2>
+                    <span id="t_pagemarker">
+                        页面标记
+                    </span>
+                    <h2/>
+							<p>
+							标记页面，保存网页的位置和高亮选择的文字。下次打开时重现。
+							</p>
+                    <img src="http://farm8.staticflickr.com/7147/6471325997_1d9d61a8cd_b.jpg">
+            </div>
+           
+            <div>
+                <h2>
+                    <span id="t_releasenote">
+                        版本升级说明
+                    </span>
+                    <h2/>
+							<p>
+							0.9.6 将SSP的全部功能整合进Ctrl Ctrl
+							</p>
+            </div>
+			<div>
+                <h2>
+                    <span id="t_enginesetting">
+                        设置搜索引擎别名
+                    </span>
+                <h2/>
+							<p>
+							方法1：点击【浏览器搜索框图标】->点击【管理搜索引擎...]
+							</p>
+							<p>
+							方法2：Ctrl Ctrl调用检索窗口->点击帮助按钮。
+							</p>
+                    <img src="pic/enginesetting.png">
+            </div>
+			<div>
+                <h2>
+                    <span id="t_ssp">
+                        SSP数据迁移
+                    </span>
+					<h2/>
+							<p>如果想把原先SSP的数据转移到Ctrl Ctrl下继续使用，按以下两步作：</p>
+							<p>
+							1、进入about:config
+							</p>
+							<p>
+							2、将extensions.sspage.mapping、extensions.sspage.lastedmarks的内容复制到extensions.handysearch.mapping、extensions.handysearch.lastedmarks
+							</p>
+            </div>
+        </div>
+        </div>
+        </div>
+
+</body>
 
 </html>
 
