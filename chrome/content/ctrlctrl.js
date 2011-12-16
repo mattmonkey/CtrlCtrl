@@ -45,11 +45,11 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 			let rslt = '';
 			if (event && event.originalTarget) {
 				let box = event.originalTarget;
-				let tagName = box.tagName.toUpperCase() || "";
-				$Log("call getSelectedStr : " + tagName);
-				if (['HTML:INPUT', 'TEXTAREA', 'INPUT'].indexOf(tagName) > - 1) {
+				let localName = box.localName || "";
+				$Log("call getSelectedStr localName : " + localName );
+				if (['textarea', 'input'].indexOf(localName ) != - 1) {
 					rslt = box.value.substring(box.selectionStart, box.selectionEnd);
-				} else if (tagName == 'HTML') {
+				} else if (localName  == 'html') {
 					rslt = getSelectedStrFromPage();
 				}
 			}
@@ -111,7 +111,9 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 			$Log("call isPressCtrlKey " + e.ctrlKey + " | " + e.keyCode);
 			// 不同系统貌似	
 			if ($GetOS() == "window") {
-				return ! e.ctrlKey && e.keyCode == 17;
+				return e.ctrlKey == false && e.keyCode == 17;
+			}else if ($GetOS() == "linux"){
+				return e.ctrlKey == true && e.keyCode == 17;
 			}
 			return e.ctrlKey;
 		}

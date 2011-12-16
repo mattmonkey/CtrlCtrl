@@ -33,7 +33,7 @@ if (typeof CtrlCtrl != "undefined") {
 
 		// 刷新页面参数。（host,url,title）
 		function refreshPageInfo() {
-			mapping = $GetPref2("mapping",{});
+			mapping = $GetPref2("mapping", {});
 			if (gBrowser.currentURI.spec.indexOf("about:") == 0) {
 				host = "about";
 				url = gBrowser.currentURI.spec;
@@ -60,7 +60,7 @@ if (typeof CtrlCtrl != "undefined") {
 				} else {
 					remove()
 				}
-				$SetPref2("mapping",mapping)
+				$SetPref2("mapping", mapping)
 			}
 		}
 

@@ -124,6 +124,7 @@ CtrlCtrl.lib = {
 	$GetOS : function(arg){
 		var aWin = arg? arg:window;
 		var ua =  aWin.navigator.userAgent.toLowerCase();
+		CtrlCtrl.lib.$Log(ua);
 		if(ua.indexOf("window")!=-1)return "window"
 		if(ua.indexOf("linux")!=-1)return "linux"
 		return win;		
