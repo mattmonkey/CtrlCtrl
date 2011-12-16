@@ -8,6 +8,7 @@ pref("extensions.handysearch.heightoffset", 25);
 pref("extensions.handysearch.width", 800);
 pref("extensions.handysearch.interv", 300);
 pref("extensions.handysearch.rule", " ");
+pref("extensions.handysearch.debug", false);
 
 pref("extensions.handysearch.sko.a",true);
 pref("extensions.handysearch.sko.d",true);

@@ -5,22 +5,15 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 (function() {
 	with(CtrlCtrl.lib) {
 		var _ctrlStamp = 0,
-		evt = null;
+		evt = null,
+		KV_CTRL = 17;
 
 		function setCtrlStamp(val, e) {
-			// 清除
-			if (val == 0) {
-				evt = null;
-				_ctrlStamp = 0;
-				return;
-			}
 
 			if (evt == null) evt = e;
 
 			// 检查是否是同一个控件的两次Ctrl
 			if (evt.originalTarget !== e.originalTarget) {
-				$Log("call setCtrlStamp  : " + e.originalTarget.tagName);
-				$Log("call setCtrlStamp  : " + evt.originalTarget.tagName);
 				evt = null;
 				_ctrlStamp = val;
 				return;
@@ -30,7 +23,6 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 			// 检查两次Ctrl间的间隔
 			let c = val - _ctrlStamp;
 			if (c > 0 && c < CCEM.interv) {
-				$Log("call setCtrlStamp interv : " + c);
 				fireDoubuleCtrl(evt);
 			} else {
 				_ctrlStamp = val;
@@ -46,10 +38,10 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 			if (event && event.originalTarget) {
 				let box = event.originalTarget;
 				let localName = box.localName || "";
-				$Log("call getSelectedStr localName : " + localName );
-				if (['textarea', 'input'].indexOf(localName ) != - 1) {
+				$Log("call getSelectedStr localName : " + localName);
+				if (['textarea', 'input'].indexOf(localName) != - 1) {
 					rslt = box.value.substring(box.selectionStart, box.selectionEnd);
-				} else if (localName  == 'html') {
+				} else if (localName == 'html') {
 					rslt = getSelectedStrFromPage();
 				}
 			}
@@ -61,23 +53,7 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 			if (!contentArea) return;
 			// 单键操作
 			if (CCEM.issinglekeyoperation) {
-				$Attr('ctrlctrl_keyset', 'disabled', false);
-				for (var i = 97; i <= 122; i++) {
-					try {
-						var c = String.fromCharCode(i);
-						if (!$GetPref("sko." + c, false)) continue;
-						var cmd = $GetPref("sko." + c + "2", ""),
-						evtName = /\(*\)/.test(cmd) ? "oncommand": "command";
-						var data = {};
-						data.key = c;
-						data[evtName] = cmd;
-						ce("key", "ctrlctrl_keyset", data);
-						$Log("call init " + c + " | " + evtName + " | " + cmd)
-					} catch(e) {
-						$Log("error " + e)
-					}
-				}
-
+				genSingleShortCut();
 			}
 
 			// 单键搜索
@@ -85,7 +61,28 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 				contentArea.addEventListener('keyup', searchBySingleKey, false);
 			}
 
-			window.addEventListener('keyup', initCtrlCtrlAction, false);
+			window.addEventListener('keydown', initCtrlCtrlAction, false);
+		}
+
+		function genSingleShortCut() {
+
+			$Attr('ctrlctrl_keyset', 'disabled', false);
+			for (var i = 97; i <= 122; i++) {
+				try {
+					var c = String.fromCharCode(i);
+					if (!$GetPref("sko." + c, false)) continue;
+					var cmd = $GetPref("sko." + c + "2", ""),
+					evtName = /\(*\)/.test(cmd) ? "oncommand": "command";
+					var data = {};
+					data.key = c;
+					data[evtName] = cmd;
+					ce("key", "ctrlctrl_keyset", data);
+					$Log("call init " + c + " | " + evtName + " | " + cmd)
+				} catch(e) {
+					$Log("error " + e)
+				}
+			}
+
 		}
 
 		function searchBySingleKey(e) {
@@ -102,20 +99,12 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 		}
 
 		function initCtrlCtrlAction(e) {
-			if (e.shiftKey || e.altKey) return;
-			let stamp = isPressCtrlKey(e) ? new Date().getTime() : 0;
-			setCtrlStamp(stamp, e);
+			if (e.shiftKey || e.altKey || ! isPressCtrlKey(e)) return;
+			setCtrlStamp(new Date().getTime(), e);
 		}
 
 		function isPressCtrlKey(e) {
-			$Log("call isPressCtrlKey " + e.ctrlKey + " | " + e.keyCode);
-			// 不同系统貌似	
-			if ($GetOS() == "window") {
-				return e.ctrlKey == false && e.keyCode == 17;
-			}else if ($GetOS() == "linux"){
-				return e.ctrlKey == true && e.keyCode == 17;
-			}
-			return e.ctrlKey;
+			return e.keyCode == KV_CTRL;
 		}
 	}
 	this.init = init

@@ -11,6 +11,7 @@ if (typeof CtrlCtrl != "undefined") {
 		// 页面初始化
 		this.load = function() {
 
+			let host = window.arguments[0];
 			// 加入站点及指定页信息
 			for (var domain in mapping) {
 				ce("menuitem", "menup_site", {
@@ -22,6 +23,7 @@ if (typeof CtrlCtrl != "undefined") {
 				if (pages && pages.length > 0) {
 					var gbox = ce("groupbox", "vbox_pages", {
 						_domain: domain,
+						collapsed : host == domain ? false : true
 					})
 					var rbox = ce("richlistbox", gbox, {
 						_domain: domain,

@@ -20,14 +20,15 @@ CtrlCtrl.lib = {
 	PAGE_RELEASE_LOG: "http://mattmonkey.github.com/CtrlCtrl/",
 	PAGE_BETA_LOG: "http://mattmonkey.github.com/CtrlCtrl/",
 	ADDON_ID: "handysearch@mattmonkey",
+	ADDON_NAME: "Ctrl Ctrl",
 	TLDS: Components.classes["@mozilla.org/network/effective-tld-service;1"].getService(Components.interfaces.nsIEffectiveTLDService),
 	$: function $(id) {
 		return document.getElementById(id);
 	},
 
 	$Log: function log2(val) {
-		//if (DBRUtil.getPref('debug', null)) 
-		this.css.logStringMessage(this.ADDON_ID + " debug : " + val)
+		if (CtrlCtrl.lib.$GetPref('debug', false)) 
+			this.css.logStringMessage(this.ADDON_ID + " debug : " + val)
 	},
 
 	$Attr: function(obj, attr, arg) {
@@ -127,7 +128,11 @@ CtrlCtrl.lib = {
 		CtrlCtrl.lib.$Log(ua);
 		if(ua.indexOf("window")!=-1)return "window"
 		if(ua.indexOf("linux")!=-1)return "linux"
-		return win;		
+		return "other";		
+	},
+
+	$OpenDialog :function(url,vals,size,pos){
+		window.openDialog(url, CtrlCtrl.lib.ADDON_NAME,"chrome=yes, dialog, modal, resizable=yes,centerscreen",vals);
 	},
 
 	checkFirstRun: function() {

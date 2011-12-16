@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://ctrlctrl/skin/overlay.css" type="text/css"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://ctrlctrl/locale/overlay.dtd">
 <window id="wind_setting" title="SSP Setting !"
 	onload = "CtrlCtrl.ns.sspsetting.load()"
+	width = "800"
+	height = "600"
+	persist = "width,height"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script src="util.js" type="application/x-javascript"/>
 	<script src="ssp.js" type="application/x-javascript"/>
@@ -23,5 +26,8 @@
 		<!-- 指定页一览容器-->		
 		<vbox id='vbox_pages' flex='1'> </vbox>
 	</vbox>
+	<keyset>	
+		<key key="w" modifiers="control" oncommand="window.close()" />
+	</keyset>		
 </window>
 

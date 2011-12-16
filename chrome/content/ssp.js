@@ -51,9 +51,15 @@ if (typeof CtrlCtrl != "undefined") {
 
 		// 点击菜单项处理。（打开页面，添加页面，删除页面）
 		function itemClickProcessor(e) {
-			var url = $Attr(e.target, 'href')
+			let url = $Attr(e.target, 'href')
 			if (url) {
-				CtrlCtrl.lib.openPage(url, e.ctrlKey)
+				let dialog = $Attr(e.target,'dialog');
+				if(dialog){
+					$Log("itemClickProcessor openDialog " + host);
+					$OpenDialog(url,host)
+				}else{
+					CtrlCtrl.lib.openPage(url, e.ctrlKey);
+				}				
 			} else {
 				if (e.target.id == 'ssp_fn_append') {
 					append()
@@ -61,6 +67,7 @@ if (typeof CtrlCtrl != "undefined") {
 					remove()
 				}
 				$SetPref2("mapping", mapping)
+				$Log("call itemClickProcessor end")
 			}
 		}
 
@@ -116,11 +123,9 @@ if (typeof CtrlCtrl != "undefined") {
 			ce('menuitem', m, {
 				label: 'setting',
 				href: "chrome://ctrlctrl/content/ssp_setting.xul",
+				dialog: true,
 				id: 'ssp_fn_setting',
 				accesskey: 's'
-			},
-			{
-				command: itemClickProcessor
 			})
 
 			// 加入<site>菜单项
@@ -178,7 +183,7 @@ if (typeof CtrlCtrl != "undefined") {
 					title: "",
 					pages: []
 				}
-				mapping[host] = siteInfo
+				mapping[host] = siteInfo;
 			}
 			// 加入页面信息
 			siteInfo.pages.push(pageInfo)
@@ -186,7 +191,8 @@ if (typeof CtrlCtrl != "undefined") {
 
 		// 删除页面信息
 		function remove() {
-			if (!mapping[host]) var pages = mapping[host].pages
+			if (!mapping[host]) return;
+			var pages = mapping[host].pages
 			for (var indx in pages) {
 				if (pages[indx].url != url) continue;
 				for (var s = parseInt(indx); s <= pages.length - 2; s++) {
@@ -194,10 +200,10 @@ if (typeof CtrlCtrl != "undefined") {
 				}
 				pages.pop();
 				if (pages.length == 0) {
+					$Log("call remove : " + host)
 					delete mapping[host]
 				}
 				break
-
 			}
 
 		}
