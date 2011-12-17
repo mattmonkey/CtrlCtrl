@@ -6,7 +6,8 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 	with(CtrlCtrl.lib) {
 		var _ctrlStamp = 0,
 		evt = null,
-		KV_CTRL = 17;
+		KV_CTRL = 17,
+		REPEAT_RIVISION = 50;
 
 		function setCtrlStamp(val, e) {
 
@@ -22,7 +23,7 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 
 			// 检查两次Ctrl间的间隔
 			let c = val - _ctrlStamp;
-			if (c > 0 && c < CCEM.interv) {
+			if (c > REPEAT_RIVISION && c < CCEM.interv ) {
 				fireDoubuleCtrl(evt);
 			} else {
 				_ctrlStamp = val;
@@ -60,7 +61,9 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 			if (CCEM.issinglekeysearch) {
 				contentArea.addEventListener('keyup', searchBySingleKey, false);
 			}
-
+			
+			// 长按问题
+			// https://developer.mozilla.org/en/DOM/KeyboardEvent#Auto-repeat_handling
 			window.addEventListener('keydown', initCtrlCtrlAction, false);
 		}
 
