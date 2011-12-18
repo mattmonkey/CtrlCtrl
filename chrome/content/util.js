@@ -43,6 +43,14 @@ CtrlCtrl.lib = {
 
 	},
 
+	$GenStr : function(){
+		let pattern = arguments[0];
+		for(var i = 1; i < arguments.length;i++){
+			pattern = pattern.replace("%"+i,arguments[i]);
+		}
+		return pattern;	
+	},
+
 	$Clean: function(node) {
 		while (node.firstChild) {
 			node.removeChild(node.firstChild);
@@ -90,13 +98,13 @@ CtrlCtrl.lib = {
 		return CtrlCtrl.lib.TLDS.getBaseDomain(aURI);
 	},
 
-	ce: function ce(name, node, data, handles, insertflg, doc) {
+	ce: function ce(name, node, data, handles,useCapture, insertflg, doc) {
 		var object = document.createElement(name);
 		for (var p in data) {
 			object.setAttribute(p, data[p])
 		}
 		for (var p in handles) {
-			object.addEventListener(p, handles[p], false)
+			object.addEventListener(p, handles[p], useCapture?true:false)
 		}
 		if (typeof node === 'string') {
 			node = document.getElementById(node)
@@ -116,7 +124,6 @@ CtrlCtrl.lib = {
 				gBrowser.selectedTab = gBrowser.addTab(val);
 			} else {
 				gBrowser.loadURI(val);
-
 			}
 		},
 		delay ? delay: 0)

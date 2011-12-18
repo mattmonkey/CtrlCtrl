@@ -89,8 +89,8 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 		}
 
 		function searchBySingleKey(e) {
-			if (e.shiftKey || e.altKey || e.ctrlKey) return;
-			var key = String.fromCharCode(e.keyCode).toLowerCase()
+			if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) return;
+			var key = String.fromCharCode(e.keyCode).toLowerCase();
 			if (!CCEM.getEngine(key)) return;
 			CCEM.searchByAlias(gBrowser, key, getSelectedStrFromPage());
 		}
@@ -102,7 +102,8 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 		}
 
 		function initCtrlCtrlAction(e) {
-			if (e.shiftKey || e.altKey || ! isPressCtrlKey(e)) return;
+			if (e.shiftKey || e.altKey || e.metaKey ||! isPressCtrlKey(e)) return;
+			// TODO  $Log(e.repeat);
 			setCtrlStamp(new Date().getTime(), e);
 		}
 

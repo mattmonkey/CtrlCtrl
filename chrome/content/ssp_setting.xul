@@ -1,22 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://ctrlctrl/locale/overlay.dtd">
-<window id="wind_setting" title="SSP Setting !"
-	onload = "CtrlCtrl.ns.sspsetting.load()"
+<window id="win_setting" title="SSP Setting !"
+	onload = "SettingHandler.load()"
 	width = "800"
 	height = "600"
 	persist = "width,height"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script src="util.js" type="application/x-javascript"/>
-	<script src="ssp.js" type="application/x-javascript"/>
-	<script src ="ssp_setting.js" type="application/x-javascript"/>
+	<script src="ssp_setting.js" type="application/x-javascript"/>
+	<script type="text/javascript">
+			<![CDATA[
+			var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
+			var data = window.arguments[0]
+			if(data){
+			//	loader.loadSubScript("chrome://ctrlctrl/content/ssp_setting.js", this,"utf-8")	
+			}else{
+			//	loader.loadSubScript("chrome://ctrlctrl/content/ssp_setting.js", this,"utf-8")	
+			}
+			]]>
+	</script>
 		<hbox>
 			<!-- 功能按钮 -->
-			<button label="up" onclick="CtrlCtrl.ns.sspsetting.movePosition(-1)"/>
-			<button label="down" onclick="CtrlCtrl.ns.sspsetting.movePosition(1)"/>
+			<button label="up" accesskey='u' onclick="SettingHandler.movePosition(-1)"/>
+			<button label="down" accesskey='d' onclick="SettingHandler.movePosition(-1)"/>
+			<button label="remove" accesskey='r' onclick="SettingHandler.remove()"/>
+			<button label="rename" accesskey='n' onclick="SettingHandler.rename()"/>
 			<label flex="1"/>
 			<!-- 过滤菜单-->
-			<menulist id='menu_site' type ="menu" label="Site" width ="150" onselect="CtrlCtrl.ns.sspsetting.menuSelectProcessor(event)">
+			<menulist id='menu_site' type ="menu" width ="150" onselect="SettingHandler.menuSelectProcessor(event)">
 			  <menupopup id='menup_site'>
 			    <menuitem label="all" cmd='all'/>
 			  </menupopup>
@@ -28,6 +40,7 @@
 	</vbox>
 	<keyset>	
 		<key key="w" modifiers="control" oncommand="window.close()" />
+		<key keycode="VK_ESCAPE" oncommand="window.close()" />
 	</keyset>		
 </window>
 
