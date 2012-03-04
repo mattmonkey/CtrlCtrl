@@ -9,23 +9,9 @@ const Application = Components.classes["@mozilla.org/fuel/application;1"].getSer
 
 
 var CCEM = {
-    cache: {}, // 缓存
-    getCache: function(val){
-        return CCEM.cache[val];
-    },
-    setCache: function(alias, obj){
-        CCEM.cache[alias] = obj;
-    },
-    clearCache: function(){
-		CCEM.log("clear cache")
-        CCEM.cache = {};
-    },
     log: function(val){
         css.logStringMessage("CtrlCtrl debug : "+val);
     },
-	test:function(){
-		
-	}
 };
 
 function genSetterGetter(props){
@@ -84,21 +70,12 @@ CCEM.executeSearchReq = function(ref,req){
 }
 
 CCEM.getEngine = function(alias,type){
-	var flg = false;
-	var engine = CCEM.getCache(alias);
-    if (!engine) {
 		if(type){
 			engine = bss.getEngineByName(alias);
 		}else{
 			engine = bss.getEngineByAlias(alias);
 		}
-		flg = true
-    }	
-    if (flg && engine) {
-		// 谁会把搜索引擎的名字起得和别名一样短呢？
-        CCEM.setCache(alias, engine);
-    }
-	return engine;	
+    return engine;	
 }
 
 CCEM.getEngineIcon = function(alias){
@@ -118,7 +95,7 @@ CCEM.genEngineTabs = function(doc,box){
 	for (var cnt in engines) {
 		var aTab =genEngineTab(engines[cnt])
 		if(engines[cnt].name == curtName) selectedIndx = cnt
-		box.appendChild(aTab)
+		box.appendChild(genEngineTab(engines[cnt]))
 	}
 
 	box.selectedIndex = selectedIndx;
@@ -140,12 +117,7 @@ CCEM.genEngineTabs = function(doc,box){
 }
 
 CCEM.getVisibleEngines = function (){
-	var rslt = CCEM.getCache('__ENGINES')
-	if (!rslt) {
-		rslt = bss.getVisibleEngines({})
-		CCEM.setCache('__ENGINES',rslt)
-	}
-	return rslt
+	return bss.getVisibleEngines({})
 }
 
 CCEM.getCurrentEngine = function (){
@@ -153,11 +125,5 @@ CCEM.getCurrentEngine = function (){
 }
 
 CCEM.ob = Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService);
-
-CCEM.ob.addObserver({
-    observe: function(aSubject, aTopic, aData){
-        CCEM.clearCache();
-    }
-}, "browser-search-engine-modified", false);
 
 			

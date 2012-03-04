@@ -60,7 +60,7 @@
 			</hbox>
 			<vbox >
 				<hbox>
-				<checkbox id="sko-checkbox" label ='&handysearch.other.singlekeyoperation;' preference="pref-singlekeyoperation" oncommand="disableDetail(event)"/>
+				<checkbox id="sko-checkbox" label ='&handysearch.other.singlekeyoperation;' preference="pref-singlekeyoperation" onclick="disableDetail(event)"/>
 				<image class ='question-icon'  tooltiptext ='&handysearch.tooltip.restartneeded;'/>
 				<label flex='1'/>
 				<button label='&handysearch.other.singlekeyoperation.detail;' oncommand='toggleDetail()'/>

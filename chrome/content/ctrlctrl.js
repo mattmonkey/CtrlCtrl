@@ -1,6 +1,7 @@
 if (typeof CtrlCtrl != "undefined") {
 	CtrlCtrl.ns.handysearch = {};
 }
+
 Components.utils.import("resource://ctrlctrl/enginemng.js");
 (function() {
 	with(CtrlCtrl.lib) {
@@ -11,27 +12,23 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 
 		function setCtrlStamp(val, e) {
 
-			if (evt == null) evt = e;
-
 			// 检查是否是同一个控件的两次Ctrl
-			if (evt.originalTarget !== e.originalTarget) {
+			if ( evt && evt.originalTarget !== e.originalTarget) {
 				evt = null;
 				_ctrlStamp = val;
 				return;
 			}
+
 			evt = e;
 
 			// 检查两次Ctrl间的间隔
 			let c = val - _ctrlStamp;
 			if (c > REPEAT_RIVISION && c < CCEM.interv ) {
 				fireDoubuleCtrl(evt);
-			} else {
-				_ctrlStamp = val;
 			}
-		}
-
-		function getSelectedStrFromPage() {
-			return $Win.getSelection().toString().trim();
+			
+			_ctrlStamp = val;
+			
 		}
 
 		function getSelectedStr(event) {
@@ -39,11 +36,16 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 			if (event && event.originalTarget) {
 				let box = event.originalTarget;
 				let localName = box.localName || "";
-				$Log("call getSelectedStr localName : " + localName);
-				if (['textarea', 'input'].indexOf(localName) != - 1) {
+				$Log("call getSelectedStr ==> localName : " + localName);
+				// 输入框
+				if (['textarea', 'input'].indexOf(localName) >= 0 ) {
 					rslt = box.value.substring(box.selectionStart, box.selectionEnd);
-				} else if (localName == 'html') {
-					rslt = getSelectedStrFromPage();
+				// 页面
+				} else if (['html','body'].indexOf(localName) >= 0) {
+					rslt = $Win.getSelection().toString().trim();
+				// 快键触发	
+				}else if (localName=="key") {	
+					return getSelectedStr({originalTarget:$Doc.activeElement})
 				}
 			}
 			return rslt.substr(0, 150);
@@ -59,16 +61,16 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 
 			// 单键搜索
 			if (CCEM.issinglekeysearch) {
-				contentArea.addEventListener('keyup', searchBySingleKey, false);
+				$event(contentArea,{keyup:searchBySingleKey})
 			}
-			
+
 			// 长按问题
 			// https://developer.mozilla.org/en/DOM/KeyboardEvent#Auto-repeat_handling
 			window.addEventListener('keydown', initCtrlCtrlAction, false);
 		}
 
+		// 添加单键处理
 		function genSingleShortCut() {
-
 			$Attr('ctrlctrl_keyset', 'disabled', false);
 			for (var i = 97; i <= 122; i++) {
 				try {
@@ -85,32 +87,35 @@ Components.utils.import("resource://ctrlctrl/enginemng.js");
 					$Log("error " + e)
 				}
 			}
-
 		}
 
+		// 处理单键检索
 		function searchBySingleKey(e) {
 			if (e.shiftKey || e.altKey || e.ctrlKey || e.metaKey) return;
 			var key = String.fromCharCode(e.keyCode).toLowerCase();
 			if (!CCEM.getEngine(key)) return;
-			CCEM.searchByAlias(gBrowser, key, getSelectedStrFromPage());
+			CCEM.searchByAlias(gBrowser, key, getSelectedStr(e));
 		}
 
+		// 触发检索窗口
 		function fireDoubuleCtrl(event) {
 			let ui = "chrome://ctrlctrl/content/search.xul";
-			let param = ["modal,titlebar=no,dialog,centerscreen,width=" + CCEM.width + ""];
+			let param = ["modal,titlebar=no,dialog,centerscreen,width=" + CCEM.width ];
 			window.openDialog(ui, "ctrl Ctrl", param, getSelectedStr(event));
 		}
 
+		// 处理双击Ctrl
 		function initCtrlCtrlAction(e) {
-			if (e.shiftKey || e.altKey || e.metaKey ||! isPressCtrlKey(e)) return;
-			// TODO  $Log(e.repeat);
+			if (e.shiftKey || e.altKey || e.metaKey || !isPressCtrlKey(e)) return;
 			setCtrlStamp(new Date().getTime(), e);
 		}
 
 		function isPressCtrlKey(e) {
 			return e.keyCode == KV_CTRL;
 		}
+
 	}
+
 	this.init = init
 	this.fireDoubuleCtrl = fireDoubuleCtrl;
 	this.initCtrlCtrlAction = initCtrlCtrlAction;

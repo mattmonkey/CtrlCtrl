@@ -6,7 +6,7 @@
 	<script src="ssp.js" type="application/x-javascript"/>	
 	<window id="main-window">
 		<keyset>	
-			<key key="q" modifiers="control" oncommand="CtrlCtrl.ns.handysearch.fireDoubuleCtrl(event)" />
+			<key key="q" modifiers="alt" oncommand="CtrlCtrl.ns.handysearch.fireDoubuleCtrl(event)" />
 		</keyset>		
 		<keyset id = 'ctrlctrl_keyset' disabled ='true'>
 		</keyset>
