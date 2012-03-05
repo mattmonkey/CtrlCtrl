@@ -10,7 +10,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="handysearch@mattmonkey"
                    em:name="Ctrl Ctrl"
-				   em:version="0.9.6"
+				   em:version="0.9.7"
                    em:creator="mattmonkey"
                    em:description="twice ctrl"
                    em:homepageURL="https://github.com/mattmonkey/CtrlCtrl"

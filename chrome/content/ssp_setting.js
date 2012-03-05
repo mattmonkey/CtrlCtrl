@@ -1,51 +1,59 @@
-if (typeof CtrlCtrl != "undefined") {
-	CtrlCtrl.ns.sspsetting = {}
-}
+with(CtrlCtrl.lib) {
+	var SettingHandler = {
+		crtListBox: null,
+		mapping: $GetPref2("mapping"),
 
-(function() {
-
-	with(CtrlCtrl.lib) {
-		var crtListBox, mapping = $GetPref2("mapping");
-
-		// ------ public method ------
-		// 页面初始化
-		this.load = function() {
-
+		load: function() {
 			let host = window.arguments[0];
+			this.initUI(host);
+		},
+
+		initUI: function(host) {
+			var self = this;
 			// 加入站点及指定页信息
-			for (var domain in mapping) {
+			for (var domain in this.mapping) {
 				ce("menuitem", "menup_site", {
 					label: domain,
-					cmd: domain
+					cmd: domain,
+					id: "mi_" + domain,
 				})
-				var pages = mapping[domain].pages
+				var pages = this.mapping[domain].pages
 				var indx = 0;
 				if (pages && pages.length > 0) {
 					var gbox = ce("groupbox", "vbox_pages", {
 						_domain: domain,
-						collapsed : host == domain ? false : true
 					})
 					var rbox = ce("richlistbox", gbox, {
 						_domain: domain,
 					},
 					{
-						click: processor,
-						dragover: dragoverProcessor,
-						dragstart: dragstartProcessor,
-						drop: dropProcessor
+						click: self,
+						dragover: self,
+						dragstart: self,
+						drop: self
 					})
+					
 					ce("caption", gbox, {
 						label: domain
 					})
 					for each(var page in pages) {
-						appendPageInfo(rbox, page, domain, indx)
+						this.appendPageInfo(rbox, page, domain, indx)
 					}
 				}
 			}
-		}
-
+			//  选择对应站点
+			if($('mi_'+host)) $("menu_site").selectedItem = $("mi_"+host)
+			
+		},
+		
+		handleEvent:function(event){
+				let processorName = event.type+"Processor"
+				if(typeof this[processorName] != "function")return;
+				this[processorName](event);
+		},
+		
 		// 站点菜单选择处理
-		this.menuSelectProcessor = function(event) {
+		menuSelectProcessor: function(event) {
 			var cmd = $Attr(event.target.selectedItem, "cmd")
 			var elms = document.getElementsByTagName("groupbox");
 			for (var i = 0; i < elms.length; i++) {
@@ -55,26 +63,49 @@ if (typeof CtrlCtrl != "undefined") {
 				} else {
 					$Attr(elm, "collapsed", $Attr(elm, "_domain") != cmd)
 				}
+				elm.firstChild.selectedIndex = 0;
 			}
-		}
+		},
 
 		// 指定页偏移移动处理。（上下和拖曳使用）
-		this.movePosition = function(offset) {
-			var p = crtListBox.currentIndex,
-			domain = $Attr(crtListBox, "_domain"),
-			rowCount = crtListBox.getRowCount();
-			// 往下时：寻找目标（p+offset）的再下面一个。
-			// 往上时：寻找目标
+		movePosition: function(offset) {
+			var p = this.crtListBox.currentIndex,
+			domain = $Attr(this.crtListBox, "_domain"),
+			rowCount =this.crtListBox.getRowCount();
 			var p2 = p + offset
 			if (p2 >= 0 && p2 <= rowCount - 1) {
-				exchange(domain, p, p2)
+				this.exchange(domain, p, p2)
 			}
-			crtListBox.focus();
-		}
+			this.crtListBox.focus();
+		},
 
-		//---------private method--------------
+		remove : function(){
+			if(!this.crtListBox)return;
+			let title = $Attr(this.crtListBox.selectedItem,"_title")
+			let domain = $Attr(this.crtListBox.selectedItem,"_domain")
+			if(confirm($GenStr("[remove] %1 ?",title))){
+				this.mapping[domain].pages.splice(this.crtListBox.selectedIndex,1);
+				$SetPref2("mapping", this.mapping)
+				this.crtListBox.removeItemAt(this.crtListBox.selectedIndex)
+			}
+
+		},
+
+		rename:function(){
+			if(!this.crtListBox)return;
+			var title = $Attr(this.crtListBox.selectedItem, "_title");
+			var newTitle =prompt($GenStr("[rename ?] %1",title),title).trim(); 
+			if(newTitle){
+				$Attr(this.crtListBox.selectedItem,"_title",newTitle);
+				$Attr(this.crtListBox.selectedItem.firstChild,"value",newTitle);
+				let domain = $Attr(this.crtListBox.selectedItem,"_domain");
+				this.mapping[domain].pages[this.crtListBox.selectedIndex].title = newTitle;
+				$SetPref2("mapping", this.mapping);
+			}
+		},
+
 		// 往列表加入指定页条目
-		function appendPageInfo(container, page, domain, indx) {
+		appendPageInfo: function(container, page, domain, indx) {
 			var item = ce("richlistitem", container, {
 				id: page.url,
 				_index: indx,
@@ -88,82 +119,80 @@ if (typeof CtrlCtrl != "undefined") {
 				class: "header",
 				tooltiptext: page.url
 			})
-		}
+		},
 
 		// 拖曳划过检查处理（同组判断）
-		function dragoverProcessor(event) {
+		dragoverProcessor: function(event) {
 			var targetDomain = event.dataTransfer.getData("domain");
-			var item = getListItemFromEvent(event)
+			var item = this.getListItemFromEvent(event)
 			itemBox = item.parentNode;
 			if ($Attr(itemBox, "_domain") == targetDomain) {
 				event.preventDefault()
 			}
-		}
+		},
 
 		// 拖曳开始处理 （dataTransfor加入传递数据）
-		function dragstartProcessor(event) {
-			if (crtListBox) {
-				event.dataTransfer.setData('domain', $Attr(crtListBox, "_domain"))
-				event.dataTransfer.setData('crtIndex', crtListBox.currentIndex)
+		dragstartProcessor: function(event) {
+			if (this.crtListBox) {
+				event.dataTransfer.setData('domain', $Attr(this.crtListBox, "_domain"))
+				event.dataTransfer.setData('crtIndex', this.crtListBox.currentIndex)
 			}
-		}
+		},
 
 		// 拖曳接触处理
-		function dropProcessor(event) {
-			var item = getListItemFromEvent(event),
-			indx = crtListBox.getIndexOfItem(item),
+		dropProcessor: function(event) {
+			var item = this.getListItemFromEvent(event),
+			indx = this.crtListBox.getIndexOfItem(item),
 			targetIndx = event.dataTransfer.getData("crtIndex");
 			if (indx != targetIndx) {
-				CtrlCtrl.ns.sspsetting.movePosition(indx - targetIndx)
+				this.movePosition(indx - targetIndx)
 			}
-		}
+		},
 
 		// 获取richlist容器 (跳过description)
-		function getListItemFromEvent(event) {
+		getListItemFromEvent: function(event) {
 			var item = event.target
 			if (event.target.tagName == "description") {
 				item = event.target.parentNode;
 			}
 			return item;
-		}
+		},
 
-		function exchange(domain, a, b) {
-			var indx = exchangeItem(a, b);
+		exchange: function(domain, a, b) {
+			var indx = this.exchangeItem(a, b);
 			if (indx != - 1) {
-				exchangeData(domain, a, b);
+				this.exchangeData(domain, a, b);
 			}
-		}
+		},
 
 		// 数据对换
-		function exchangeData(domain, a, b) {
-			var pages = mapping[domain].pages,
-			target,
-			tmp;
+		exchangeData: function(domain, a, b) {
+			var pages =this.mapping[domain].pages,
 			tmp = pages[a];
 			pages[a] = pages[b]
 			pages[b] = tmp
-			$SetPref2("mapping",mapping)
-		}
+			$SetPref2("mapping", this.mapping)
+		},
 
 		// 指定页条目对换
-		function exchangeItem(a, b) {
+		exchangeItem: function(a, b) {
 			try {
-				var refElm = crtListBox.getItemAtIndex(b)
+				var refElm = this.crtListBox.getItemAtIndex(b)
 				var tmpElm = refElm.cloneNode(true);
-				var objElm = crtListBox.removeItemAt(a);
-				crtListBox.replaceChild(objElm, refElm);
-				crtListBox.insertBefore(tmpElm, crtListBox.getItemAtIndex(a));
+				var objElm = this.crtListBox.removeItemAt(a);
+				this.crtListBox.replaceChild(objElm, refElm);
+				this.crtListBox.insertBefore(tmpElm, this.crtListBox.getItemAtIndex(a));
 			} catch(e) {
 				return - 1;
 			}
-		}
+		},
 
 		// 条目点击事件处理 （保存当前的选择条目）
-		function processor(event) {
-			var item = getListItemFromEvent(event)
-			crtListBox = item.parentNode;
+		clickProcessor: function(event) {
+			var item = this.getListItemFromEvent(event)
+			this.crtListBox = item.parentNode;
 		}
-	}
 
-}).apply(CtrlCtrl.ns.sspsetting);
+	}
+}
 

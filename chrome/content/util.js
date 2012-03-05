@@ -43,6 +43,14 @@ CtrlCtrl.lib = {
 
 	},
 
+	$GenStr : function(){
+		let pattern = arguments[0];
+		for(var i = 1; i < arguments.length;i++){
+			pattern = pattern.replace("%"+i,arguments[i]);
+		}
+		return pattern;	
+	},
+
 	$Clean: function(node) {
 		while (node.firstChild) {
 			node.removeChild(node.firstChild);
@@ -90,24 +98,32 @@ CtrlCtrl.lib = {
 		return CtrlCtrl.lib.TLDS.getBaseDomain(aURI);
 	},
 
-	ce: function ce(name, node, data, handles, insertflg, doc) {
-		var object = document.createElement(name);
+	$event:function(elm,handles){
+		this.ce(elm,null,null,handles)
+	},
+
+	ce: function ce(elm, node, data, handles,useCapture, insertflg, doc) {
+			
+		if (typeof elm === 'string') {
+			elm = document.createElement(elm);
+		}
+			
 		for (var p in data) {
-			object.setAttribute(p, data[p])
+			elm.setAttribute(p, data[p])
 		}
 		for (var p in handles) {
-			object.addEventListener(p, handles[p], false)
+			elm.addEventListener(p, handles[p], useCapture?true:false)
 		}
-		if (typeof node === 'string') {
+		if (typeof node == 'string') {
 			node = document.getElementById(node)
 		}
 		if (insertflg != true) {
-			if (node) node.appendChild(object)
+			if (node) node.appendChild(elm)
 		}
 		else {
-			if (node) node.insertBefore(object, node.firstChild)
+			if (node) node.insertBefore(elm, node.firstChild)
 		}
-		return object
+		return elm 
 	},
 
 	openPage: function openPage(val, flg, delay) {
@@ -116,7 +132,6 @@ CtrlCtrl.lib = {
 				gBrowser.selectedTab = gBrowser.addTab(val);
 			} else {
 				gBrowser.loadURI(val);
-
 			}
 		},
 		delay ? delay: 0)
